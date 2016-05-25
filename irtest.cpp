@@ -38,21 +38,26 @@ void check_wall()
 {
 
 	while (true){
-		//Assuming front sensor is port 0, 1 is left and 2 is right
-		sensor1_reading = read_analog(0);
-		sensor2_reading = read_analog(1);
-		sensor3_reading = read_analog(2);
+		
+		front_sensor = read_analog(5);
+		left_sensor = read_analog(0);
+		right_sensor = read_analog(1);
 
-		if (check_left() == 0) // if walls in front and right
+		if (check_left() == 0) // if able to turn left
 		{
 		  stop();
 		  turn_left(); // then turn left
 		}
 
-		else if (check_front() == 0) // if walls on left and right, but front is clear
+		else if (check_front() == 0 && check_right() == 0) // if walls on left, but front and right is clear
 		{
 		  forwards(); // then go straight ahead
 		  // then continue to follow the wall follower method
+		}
+		
+		else if (check_front() == 0) // if walls on left and right, but front is clear
+		{
+		  //wall follow method
 		}
 
 		else if (check_right() == 0) // if walls in front and left
