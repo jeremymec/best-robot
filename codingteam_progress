@@ -57,5 +57,8 @@ Software - First 3 quadrants have been completely implemented into one file of c
 
 -Ideas of printing a battery holder discussed due to spacing issues.
 
+- Debugged IR code
+
+- Updated and simplified IR code to work with line follower/wall follower (fixed if statements)
 
 
