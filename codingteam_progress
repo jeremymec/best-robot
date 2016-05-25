@@ -36,4 +36,4 @@ Hardware - IR sensors need to be fixed in place on the front, left and right sid
 Software - First 3 quadrants have been completely implemented into one file of code (yet to upload to git). Due to changes in hardware, tuning will have to be done to make sure motor speeds and PID are working correctly.
 - IR sensor was commented to increase comprehension of the code when testing
 
-
+hi
