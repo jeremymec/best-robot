@@ -158,13 +158,13 @@ void wall_turn_right()
     Sleep(1, 0);
     set_motor(1, default_speed);//forward
     set_motor(2, 2+default_speed);
-    Sleep(_s_, _usec_);
+    Sleep(1,300000);
     set_motor(1, -default_speed);//right
     set_motor(2, 2+default_speed);
-    Sleep(_s_, _usec_);
+    Sleep(0,600000);
     set_motor(1, default_speed);//forward
     set_motor(2, 2+default_speed);
-    Sleep(_s_, _usec_);
+    Sleep(0,500000);
     set_motor(1, 0);//stop
     set_motor(2, 0);
     Sleep(1, 0);
@@ -177,8 +177,9 @@ void wall_dead_end()
     Sleep(1, 0);
     set_motor(1, default_speed);//turn
     set_motor(2, 2-default_speed);
-    Sleep(_s_, _usec_);
+    Sleep(2,600000);
     set_motor(1, 0);//stop
     set_motor(2, 0);
     Sleep(1, 0);
 }
+
