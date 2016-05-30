@@ -18,7 +18,7 @@ int main()
 
     int current_error; //keeps error of one image process
 
-    float kp = 0.015; //proportional constant
+    float kp = 0.016; //proportional constant
     int proportional_signal = 0; //used with kp and set_motor
 
     int left_max_value = 680;
@@ -134,52 +134,34 @@ int main()
 
 void wall_turn_left()
 {
-    set_motor(1, 0);//stop
-    set_motor(2, 0);
-    Sleep(1, 0);
     set_motor(1, default_speed);//forward
     set_motor(2, 2+default_speed);
     Sleep(1,300000);
     set_motor(1, default_speed);//left
     set_motor(2, 2-default_speed);
-    Sleep(0,800000);
+    Sleep(0,900000);
     set_motor(1, default_speed);//forward
     set_motor(2, 2+default_speed);
     Sleep(0,900000);
-    set_motor(1, 0);//stop
-    set_motor(2, 0);
-    Sleep(1, 0);
 }
 
 void wall_turn_right()
 {
-    set_motor(1, 0);//stop
-    set_motor(2, 0);
-    Sleep(1, 0);
     set_motor(1, default_speed);//forward
     set_motor(2, 2+default_speed);
-    Sleep(1,300000);
+    Sleep(0,900000);
     set_motor(1, -default_speed);//right
     set_motor(2, 2+default_speed);
-    Sleep(0,600000);
+    Sleep(0,550000);
     set_motor(1, default_speed);//forward
     set_motor(2, 2+default_speed);
     Sleep(0,500000);
-    set_motor(1, 0);//stop
-    set_motor(2, 0);
-    Sleep(1, 0);
 }
 
 void wall_dead_end()
 {
-    set_motor(1, 0);//stop
-    set_motor(2, 0);
-    Sleep(1, 0);
     set_motor(1, default_speed);//turn
     set_motor(2, 2-default_speed);
     Sleep(2,600000);
-    set_motor(1, 0);//stop
-    set_motor(2, 0);
-    Sleep(1, 0);
 }
 
