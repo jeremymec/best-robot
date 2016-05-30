@@ -10,6 +10,8 @@ void wall_turn_right();
 void wall_dead_end();
 void wall_straight();
 
+int default_speed = 35;
+
 int main()
 {
     init(0);
@@ -18,8 +20,6 @@ int main()
 
     float kp = 0.015; //proportional constant
     int proportional_signal = 0; //used with kp and set_motor
-
-    int default_speed = 35;
 
     int left_max_value = 680;
     int right_max_value= 680;
@@ -53,11 +53,9 @@ int main()
 
 
         if (left_sensor < previous_left2-difference){//if left open
-            wall_turn_left();
             printf("Left\n");
-set_motor(1, 0);//right_motor); //right
-            set_motor(2, 0);
-break;
+            wall_turn_left();
+            break;
             continue;
         }
         else if (middle_sensor < 496 && right_sensor < previous_right2-difference){//if middle open and right open
@@ -89,9 +87,9 @@ break;
                 previous_middle2 = previous_middle1;
                 previous_right2 = previous_right1;
             }
-set_motor(1, 0);//right_motor); //right
+            set_motor(1, 0);//right_motor); //right
             set_motor(2, 0);
-break;
+            break;
             continue;
         }
         else if (middle_sensor < 496){//if wall either side, do PID stuff
@@ -119,42 +117,67 @@ break;
         }
         else if (left_sensor < right_sensor + 100 || left_sensor > right_sensor - 100)
         {
-            wall_dead_end();
             printf("Dead end\n");
-            set_motor(1,0);
-            set_motor(2,0);
+            wall_dead_end();
             break;
         }
         else {
-            wall_turn_right();
             printf("Right\n");
-set_motor(1, 0);//right_motor); //right
-            set_motor(2, 0);
-break;
+            wall_turn_right();
+            break;
             continue;
         }
-        
-        //printf("Right Max value: %d Left Max Value: %d\n", right_max_value, left_max_value);
 
     }
 }
 
 void wall_turn_left()
 {
-
+    set_motor(1, 0);//stop
+    set_motor(2, 0);
+    Sleep(1, 0);
+    set_motor(1, default_speed);//forward
+    set_motor(2, 2+default_speed);
+    Sleep(_s_, _usec_);
+    set_motor(1, default_speed);//left
+    set_motor(2, 2-default_speed);
+    Sleep(_s_, _usec_);
+    set_motor(1, default_speed);//forward
+    set_motor(2, 2+default_speed);
+    Sleep(_s_, _usec_);
+    set_motor(1, 0);//stop
+    set_motor(2, 0);
+    Sleep(1, 0);
 }
 
 void wall_turn_right()
 {
-
+    set_motor(1, 0);//stop
+    set_motor(2, 0);
+    Sleep(1, 0);
+    set_motor(1, default_speed);//forward
+    set_motor(2, 2+default_speed);
+    Sleep(_s_, _usec_);
+    set_motor(1, -default_speed);//right
+    set_motor(2, 2+default_speed);
+    Sleep(_s_, _usec_);
+    set_motor(1, default_speed);//forward
+    set_motor(2, 2+default_speed);
+    Sleep(_s_, _usec_);
+    set_motor(1, 0);//stop
+    set_motor(2, 0);
+    Sleep(1, 0);
 }
 
 void wall_dead_end()
 {
-
-}
-
-void wall_straight()
-{
-
+    set_motor(1, 0);//stop
+    set_motor(2, 0);
+    Sleep(1, 0);
+    set_motor(1, default_speed);//turn
+    set_motor(2, 2-default_speed);
+    Sleep(_s_, _usec_);
+    set_motor(1, 0);//stop
+    set_motor(2, 0);
+    Sleep(1, 0);
 }
