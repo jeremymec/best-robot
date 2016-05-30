@@ -10,7 +10,7 @@ void wall_turn_right();
 void wall_dead_end();
 void wall_straight();
 
-int default_speed = 35;
+int default_speed = 37;
 
 int main()
 {
@@ -40,7 +40,7 @@ int main()
     int middle_sensor = read_analog(1);
     int right_sensor = read_analog(2);
 
-    int difference = 50;
+    int difference = 40;
 
     while(true){
 
@@ -58,10 +58,10 @@ int main()
             break;
             continue;
         }
-        else if (middle_sensor < 496 && right_sensor < previous_right2-difference){//if middle open and right open
+        else if (middle_sensor < 120 && right_sensor < previous_right2-difference){//if middle open and right open
             printf("Straight\n");
             set_motor(1,default_speed);
-            set_motor(2,2+default_speed);
+            set_motor(2,3+default_speed);
             while (true){
                 left_sensor = read_analog(0);
                 middle_sensor = read_analog(1);
@@ -92,6 +92,12 @@ int main()
             break;
             continue;
         }
+        else if (right_sensor < previous_right2-difference){
+            printf("Right\n");
+            wall_turn_right();
+            break;
+            continue;
+        }
         else if (middle_sensor < 496){//if wall either side, do PID stuff
             printf("Yay\n");
             current_error = right_sensor - left_sensor;
@@ -115,18 +121,13 @@ int main()
             previous_right2 = previous_right1;
 
         }
-        else if (left_sensor < right_sensor + 100 || left_sensor > right_sensor - 100)
+        else (left_sensor < right_sensor + 100 || left_sensor > right_sensor - 100)
         {
             printf("Dead end\n");
             wall_dead_end();
             break;
         }
-        else {
-            printf("Right\n");
-            wall_turn_right();
-            break;
-            continue;
-        }
+        
 
     }
 }
@@ -138,13 +139,13 @@ void wall_turn_left()
     Sleep(1, 0);
     set_motor(1, default_speed);//forward
     set_motor(2, 2+default_speed);
-    Sleep(_s_, _usec_);
+    Sleep(1,300000);
     set_motor(1, default_speed);//left
     set_motor(2, 2-default_speed);
-    Sleep(_s_, _usec_);
+    Sleep(0,800000);
     set_motor(1, default_speed);//forward
     set_motor(2, 2+default_speed);
-    Sleep(_s_, _usec_);
+    Sleep(0,900000);
     set_motor(1, 0);//stop
     set_motor(2, 0);
     Sleep(1, 0);
