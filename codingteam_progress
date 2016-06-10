@@ -33,8 +33,6 @@
 
 - IR sensor drafted
 
--
-
 20th May 2016
 ------------------------------------------------
 
@@ -61,4 +59,16 @@ Software - First 3 quadrants have been completely implemented into one file of c
 
 - Updated and simplified IR code to work with line follower/wall follower (fixed if statements)
 
+31st May 2016
+-----------------------------------------------
+- Final testing was done for software for fine tuning of movement in maze
 
+- Hardware finished, ditched the battery holder to keep compact size to fit in maze 
+
+- Fixed up any hardware details such as wiring and filmsy areas of the design
+
+1st June 2016
+------------------------------------------------
+- During lab time the robot completed all four quadrents getting 100% on the first try with a time of around 2 minutes and 53 seconds.
+
+- Aesthetics were marked and produced a result of -3 points out of -20 for errors such as wiring, fimlsy battery holder etc.
